@@ -19,7 +19,7 @@ const mongoUrl = "mongodb+srv://dbRest:dbRest123@cluster0.g4wzh.mongodb.net/rest
 // }))
 
 app.get('/',(req,res) => {
-    res.send("<div><a href='http://localhost:5500/location' target='_blank'>Location</a><br/><a href='http://localhost:5500/mealtype' target='_blank'>MealType</a><br/><a href='http://localhost:5500/cuisine' target='_blank'>Cuisine or Widgtes</a><br/><a href='http://localhost:5500/restaurant' target='_blank'>Restaurant</a><br/> <br/><a href='http://localhost:5500/orders' target='_blank'>Orders</a></div>")
+    res.send("<div><a href='http://localhost:5500/location' target='_blank'>Location</a><br/><a href='http://localhost:5500/mealtype' target='_blank'>MealType</a><br/><a href='http://localhost:5500/cuisine' target='_blank'>Cuisine or Widgtes</a><br/>  <a href='http://localhost:5500/restaurant' target='_blank'>Restauarant</a><br/><a href='http://localhost:5500/orders' target='_blank'>Orders</a></div>")
 })
 
 //City List
@@ -49,7 +49,7 @@ app.get('/cuisine',(req,res) => {
 })
 
 //Restaurant
-app.get('/restaurants',(req,res) => {
+app.get('/restaurant',(req,res) => {
     var query = {};
     if(req.query.city && req.query.mealtype){
         query={city:req.query.city,"type.mealtype":req.query.mealtype}
@@ -60,7 +60,7 @@ app.get('/restaurants',(req,res) => {
     else if(req.query.mealtype){
         query={"type.mealtype":req.query.mealtype}
     }
-    db.collection('restaurants').find(query).toArray((err,result) =>{
+    db.collection('restaurant').find(query).toArray((err,result) =>{
         if(err) throw err;
         res.send(result)
     })
@@ -69,7 +69,7 @@ app.get('/restaurants',(req,res) => {
 app.get('/restaurantDetails/:id',(req,res) => {
     //  
     var query = {_id:req.params.id}
-    db.collection('restaurants').find(query).toArray((err,result) =>{
+    db.collection('restaurant').find(query).toArray((err,result) =>{
         if(err) throw err;
         res.send(result)
     })
@@ -77,7 +77,7 @@ app.get('/restaurantDetails/:id',(req,res) => {
 
 // FILTER
 
-app.get("/restaurants/:mealtype", (req, res) => {
+app.get("/restaurant/:mealtype", (req, res) => {
     let query = {"type.mealtype": req.params.mealtype};
     let sort = {cost:1}
     if(req.query.city && req.query.sort){
@@ -97,7 +97,7 @@ app.get("/restaurants/:mealtype", (req, res) => {
         query = {"type.mealtype":req.params.mealtype,"cost":{$gt:parseInt(req.query.lcost),$lt:parseInt(req.query.hcost)}}
     }
 
-    db.collection("restaurants").find(query).sort(sort).toArray((err, result) => {
+    db.collection("restaurant").find(query).sort(sort).toArray((err, result) => {
         if(err) throw err;
         res.send(result)
     })
