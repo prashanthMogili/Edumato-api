@@ -19,7 +19,8 @@ const mongoUrl = "mongodb+srv://dbRest:dbRest123@cluster0.g4wzh.mongodb.net/rest
 // }))
 
 app.get('/',(req,res) => {
-    res.send("<div><a href='http://localhost:5500/location' target='_blank'>Location</a><br/><a href='http://localhost:5500/mealtype' target='_blank'>MealType</a><br/><a href='http://localhost:5500/cuisine' target='_blank'>Cuisine or Widgtes</a><br/>  <a href='http://localhost:5500/restaurant' target='_blank'>Restauarant</a><br/><a href='http://localhost:5500/orders' target='_blank'>Orders</a></div>")
+    res.send("<div><h1>Home Page</h1></div>");
+    // res.send("<div><a href='http://localhost:5500/location' target='_blank'>Location</a><br/><a href='http://localhost:5500/mealtype' target='_blank'>MealType</a><br/><a href='http://localhost:5500/cuisine' target='_blank'>Cuisine or Widgtes</a><br/>  <a href='http://localhost:5500/restaurant' target='_blank'>Restauarant</a><br/><a href='http://localhost:5500/orders' target='_blank'>Orders</a></div>")
 })
 
 //City List
